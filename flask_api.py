@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #Code by Lukas Hennicks, lukashen@kth.se.
 #Note that this file should be in the root directory.
 

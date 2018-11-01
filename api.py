@@ -146,7 +146,7 @@ def app_run(scope=''):
         app.run(host=IP_IFACE, port=API_PORT)
 
 def main():
-    app_run('local')
+    app_run()
 
 
 

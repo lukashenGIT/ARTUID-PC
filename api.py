@@ -25,7 +25,7 @@ DB_PATH = './Resources/main.db'
 API_PORT = 9000
 MVMT_PORT = 9001
 IP_LOCAL = '127.0.0.1'
-IP_IFACE = '130.229.142.238' # dependent on platform. Lukas MBP at home as placeholder.
+IP_IFACE = '130.229.128.91' # dependent on platform. Lukas MBP at home as placeholder.
 
 """ Create flask app. """
 app = Flask(__name__)
@@ -146,7 +146,7 @@ def app_run(scope=''):
         app.run(host=IP_IFACE, port=API_PORT)
 
 def main():
-    app_run()
+    app_run('local')
 
 
 

@@ -19,18 +19,17 @@
     -../dummy_program.py
     -../Resources/ (folder will include api_log.log and main.db after first run of api)
 
-  Before deployment, IP_IFACE has to be adjusted to the IPv4 of the used interface of the computer.
+  Before deployment, the IP addresses has to change from localhost to the interface connected to the LAN. This can be done by changing the -l option of api.py to -i <iface address>.
 
   Ports used:
 
     API - 9000
-    CALCULATIONS_APP - 9001
+    DRIVER - 9001
     ...
 
 
 
-  Dependencies:
+  Non standard Dependencies (for python3):
     Python:
       * Flask
-      * Python3
       * SQLite3

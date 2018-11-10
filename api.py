@@ -7,10 +7,11 @@ from datetime import datetime
 from time import sleep
 from pprint import pformat
 import socket
-import sys
+import sys, getopt
 import json
 import logging
 import sqlite3
+
 
 
 
@@ -21,11 +22,10 @@ logging.basicConfig(filename='./Resources/api_log.log', level=40, format='%(asct
 """ Set up db params and path. """
 DB_PATH = './Resources/main.db'
 
-""" Define PORTS & IP's """
+""" Define PORTS. Pre-decided."""
 API_PORT = 9000
 MVMT_PORT = 9001
-IP_LOCAL = '127.0.0.1'
-IP_IFACE = '130.229.128.91' # dependent on platform. Lukas MBP at home as placeholder.
+localhost = "127.0.0.1"
 
 """ Create flask app. """
 app = Flask(__name__)
@@ -114,7 +114,7 @@ def get_and_post():
         """ Set up local inter-app TCP socket and establish connection."""
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((IP_LOCAL, MVMT_PORT))
+            s.connect((localhost, MVMT_PORT))
             s.send(parameters.encode('utf-8'))
             return ("Request Successful for ID: " + str(id))
         except socket.error:
@@ -130,7 +130,7 @@ def get_and_post():
 
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((IP_LOCAL, MVMT_PORT))
+            s.connect((localhost, MVMT_PORT))
             s.send(request.form['parameters'].encode('utf-8'))
             return ("Request Successful for ID: " + str(request.form['id']))
         except socket.error:
@@ -138,17 +138,32 @@ def get_and_post():
             abort(500)
 
 
-def app_run(scope=''):
+def app_run(ip='local'):
     """ Default to localhost """
-    if(scope == 'local'):
-        app.run(host=IP_LOCAL, port=API_PORT, debug = 'ON')
+    if(ip == 'local'):
+        app.run(host="127.0.0.1", port=API_PORT, debug = 'ON')
     else:
-        app.run(host=IP_IFACE, port=API_PORT)
+        app.run(host=ip, port=API_PORT)
 
-def main():
-    app_run('local')
+def main(argv):
+
+
+    """ Set options. """
+    try:
+      opts, args = getopt.getopt(argv,"i:l",["ip="])
+    except getopt.GetoptError:
+      print('api.py -i <interface ip> -l (local)')
+      sys.exit(2)
+
+    for opt, arg in opts:
+        if opt == '-l':
+            app_run()
+        elif opt in ("-i", "--ip"):
+            app_run(arg)
+
+
 
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

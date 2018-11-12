@@ -104,38 +104,15 @@ def GET_health_attr(attribute):
 def get_and_post():
     """ GET capability is only for demonstrations purposes. """
     if request.method == 'GET':
-        # WITH QUERY PARAMETERS:
-        parameters = request.args.get('parameters', None)
-        seq_num = request.args.get('seq_num', None)
+        conn = sqlite3.connect(QUERY_DB_PATH)
+        c = conn.cursor()
+        c.execute("SELECT * FROM QUERIES")
+        conn.commit()
+        content = c.fetchall()
+        content = pformat(content)
+        conn.close()
+        return Response(str(content), mimetype="text/plain")
 
-        """ Update DB """
-        dbconn = sqlite3.connect(QUERY_DB_PATH)
-        db = dbconn.cursor()
-        db.execute("CREATE TABLE IF NOT EXISTS QUERIES(ID integer PRIMARY KEY AUTOINCREMENT, parameters integer NOT NULL, seq_num integer NOT NULL);")
-        db.execute("INSERT INTO QUERIES VALUES(?, ?, ?)", (None, parameters, seq_num))
-        dbconn.commit()
-        dbconn.close()
-
-        """ Run C-code """
-        result = subprocess.run(C_CODE_PATH, stdout=subprocess.PIPE)
-        print(result.stdout)
-
-        if parameters == None or seq_num == None:
-            logging.error("Bad request was issued. Missing parameters in query.")
-            abort(400) #Bad request, missing params.
-            #return ("Request Unsuccessful. Missing query parameters.")
-
-        return ("Request Successful for SEQ: " + str(seq_num))
-
-        """ Set up local inter-app TCP socket and establish connection."""
-        """try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((localhost, MVMT_PORT))
-            s.send(parameters.encode('utf-8'))
-            return ("Request Successful for ID: " + str(id))
-        except socket.error:
-            logging.error("A GET-Query could not be resolved. There was an error connecting to the movement program.")
-            abort(500)"""
 
     elif request.method == 'POST':
         if request.form['parameters'] == None or request.form['seq_num'] == None:
@@ -163,14 +140,6 @@ def get_and_post():
 
             return ("Request Successful for SEQ: " + str(seq_num))
 
-        """try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect((localhost, MVMT_PORT))
-            s.send(request.form['parameters'].encode('utf-8'))
-            return ("Request Successful for ID: " + str(request.form['id']))
-        except socket.error:
-            logging.error("A POST could not be resolved. There was an error connecting to the movement program.")
-            abort(500)"""
 
 
 def app_run(ip='local'):

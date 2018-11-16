@@ -27,7 +27,6 @@ C_CODE_PATH = './dummy'
 
 """ Define PORTS. Pre-decided."""
 API_PORT = 9000
-MVMT_PORT = 9001
 localhost = "127.0.0.1"
 
 """ Create flask app. """

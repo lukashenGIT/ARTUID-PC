@@ -1,0 +1,212 @@
+{
+  "seq_num": 0,
+  "light_parameters": {
+    "arm1": {
+      "link1": {
+        "pattern": "blinking",
+        "color": "red",
+        "bg": "blue",
+        "dir": "1",
+        "size": "1"
+      },
+      "link2": {
+        "pattern": "vertical_stripe",
+        "color": "green",
+        "bg": "yellow",
+        "dir": "0",
+        "size": "1"
+      },
+      "link3": {
+        "pattern": "vertical_stripe",
+        "color": "red",
+        "bg": "green",
+        "dir": "0",
+        "size": "1"
+      },
+      "delay": "400"
+    },
+    "arm2": {
+      "link1": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link2": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link3": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "delay": "0"
+    },
+    "arm3": {
+      "link1": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link2": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link3": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "delay": "0"
+    },
+    "arm4": {
+      "link1": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link2": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link3": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "delay": "0"
+    },
+    "arm5": {
+      "link1": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link2": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link3": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "delay": "0"
+    },
+    "arm6": {
+      "link1": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link2": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "link3": {
+        "pattern": "0",
+        "color": "0",
+        "bg": "0",
+        "dir": "0",
+        "size": "0"
+      },
+      "delay": "0"
+    }
+  },
+  "move_parameters": {
+    
+    "arm1": {
+      "traveldistance": 0,
+      "radius": 0,
+      "weight_1": 0,
+      "weight_2": 0,
+      "weight_3": 0,
+      "weight_4": 0,
+      "weight_5": 0,
+      "weight_6": 0
+    },
+    "arm2": {
+      "traveldistance": 0,
+      "radius": 0,
+      "weight_1": 0,
+      "weight_2": 0,
+      "weight_3": 0,
+      "weight_4": 0,
+      "weight_5": 0,
+      "weight_6": 0
+    },
+    "arm3": {
+      "traveldistance": 0,
+      "radius": 0,
+      "weight_1": 0,
+      "weight_2": 0,
+      "weight_3": 0,
+      "weight_4": 0,
+      "weight_5": 0,
+      "weight_6": 0
+    },
+    "arm4": {
+      "traveldistance": 0,
+      "radius": 0,
+      "weight_1": 0,
+      "weight_2": 0,
+      "weight_3": 0,
+      "weight_4": 0,
+      "weight_5": 0,
+      "weight_6": 0
+    },
+    "arm5": {
+      "traveldistance": 0,
+      "radius": 0,
+      "weight_1": 0,
+      "weight_2": 0,
+      "weight_3": 0,
+      "weight_4": 0,
+      "weight_5": 0,
+      "weight_6": 0
+    },
+    "arm6": {
+      "traveldistance": 0,
+      "radius": 0,
+      "weight_1": 0,
+      "weight_2": 0,
+      "weight_3": 0,
+      "weight_4": 0,
+      "weight_5": 0,
+      "weight_6": 0
+    }
+  }
+}

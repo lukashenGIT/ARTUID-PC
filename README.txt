@@ -1,27 +1,27 @@
   This api has several routes/views:
 
-    GET /health: returns a json plaintext file of all health parameters.
+    GET /health: returns a json file of all arms and their motor temperatures.
 
-    GET /health/<param>: returns a specific parameter of type <param>
+    GET /health/arm/<arm_number>: returns temperatures of a specific arm
 
-    POST /health: Append a new entry to the health database (main.db) Parameters used as of now: heat, time_running, disturbances and vibrations as demonstration.
-    Real scenario will most likely only be heat of different motors and time_running.
+    POST /run The api expects a sequence number with key "seq_num" in the heder of the request and input data in the body of the format of the sample_json file included.
 
-    GET /run Returns Query DB.
-
-    POST /run Body should include parameters=<params> and seq_num=<seq_num>. This is used for posting data to the dummy program.
+    GET /run/status Returns a 1 if the robot is performing a request. Otherwise 0.
 
   Files included should be:
 
     -../api.py
-    -../dummy.c
-    -../Resources/ (folder will include api_log.log , health.db and queries.db after first run of api)
+    -../helpers.py
+    -../dummy_program.py
+    -../Resources/ (folder will include api_log.log and main.db after first run of api)
+    -../sample_json.py
 
   Before deployment, the IP addresses has to change from localhost to the interface connected to the LAN. This can be done by changing the -l option of api.py to -i <iface address>.
 
   Ports used:
 
     API - 9000
+    DRIVER - 9001
     ...
 
 
@@ -29,4 +29,4 @@
   Non standard Dependencies (for python3):
     Python:
       * Flask
-      * SQLite3 (Might be standard depending on version.)
+      * SQLite3

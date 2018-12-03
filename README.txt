@@ -4,7 +4,7 @@
 
     GET /health/arm/<arm_number>: returns temperatures of a specific arm
 
-    POST /run The api expects a sequence number with key "seq_num" in the heder of the request and input data in the body of the format of the sample_json file included.
+    POST /run The api expects a sequence number with key "seq_num" in the heder of the request and input data in the body of the format of the sample_json_input file included.
 
     GET /run/status Returns a 1 if the robot is performing a request. Otherwise 0.
 

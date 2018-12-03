@@ -1,0 +1,9 @@
+{
+	"anger": 0.5,
+	"fear": 0.3,
+	"joy": 0.1,
+	"sadness": 0.7,
+	"analytical": 0.8,
+	"tentative": 0.1,
+	"confident": 0.3
+}

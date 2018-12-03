@@ -25,19 +25,6 @@ def json_to_light_parameters(json_file):
 	return out
 
 
-def update_move_db(jsonf, dbcur):
-	seq_num = jsonf["seq_num"]
-
-	for arm in range(1,7):
-		traveldistance = jsonf['move_parameters']["arm{}".format(arm)]["traveldistance"]
-		radius = jsonf['move_parameters']["arm{}".format(arm)]["radius"]
-		weight_1 = jsonf['move_parameters']["arm{}".format(arm)]["weight_1"]
-		weight_2 = jsonf['move_parameters']["arm{}".format(arm)]["weight_2"]
-		weight_3 = jsonf['move_parameters']["arm{}".format(arm)]["weight_3"]
-		weight_4 = jsonf['move_parameters']["arm{}".format(arm)]["weight_4"]
-		weight_5 = jsonf['move_parameters']["arm{}".format(arm)]["weight_5"]
-		weight_6 = jsonf['move_parameters']["arm{}".format(arm)]["weight_6"]
-		dbcur.execute("INSERT INTO MOV_QUERIES_ARM{} VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);".format(arm), (None, traveldistance, radius, weight_1, weight_2, weight_3, weight_4, weight_5, weight_6, seq_num))
 
 
 

@@ -2,7 +2,6 @@
 #Code by Lukas Hennicks, lukashen@kth.se.
 #Note that this file should be in the root directory.
 
-
 from flask import Flask, request, jsonify, Response, abort
 from datetime import datetime
 from time import sleep
@@ -13,7 +12,8 @@ import json
 import logging
 import sqlite3
 import subprocess
-from helpers import json_to_light_parameters, update_move_db, make_dbs
+from helpers import json_to_light_parameters, update_move_db, make_dbs, feelings_to_json
+from feelings import *
 
 
 """ Make sure all necessary tables are created in db files. """
@@ -127,23 +127,52 @@ def run_post_query():
 		status = 1
 
 		""" get json """
-		jsonf = request.get_json()
+		feels_jsonf = request.get_json()
 		seq_num = request.headers['seq_num']
+
+		anger = feels_jsonf['anger']
+		fear = feels_jsonf['fear']
+		joy = feels_jsonf['joy']
+		sadness = feels_jsonf['sadness']
+		analytical = feels_jsonf['analytical']
+		confident = feels_jsonf['confident']
+		tentative = feels_jsonf['tentative']
+
+
+
+		anger_pi = anger*100
+		fear_pi = fear*100
+		joy_pi = joy*100
+		sadness_pi = sadness*100
+		analytical_pi = analytical*100
+		confident_pi = confident*100
+		tentative_pi = tentative*100
+
+
+		""" Convert feelings to actual arm parameters """
+		all_the_feels = normalize(anger, fear, joy, sadness, analytical, confident, tentative)
+
 
 		""" Update movement in DB"""
 		dbconn = sqlite3.connect(QUERY_DB_PATH)
 		db = dbconn.cursor()
-		move_parameters = update_move_db(jsonf, db)
+		db.execute("INSERT INTO MOV_QUERIES VALUES(?, ?, ?, ?, ?, ?, ?, ?)", (None, anger, sadness, confident, fear, joy, tentative, analytical))		
 		dbconn.commit()
 		dbconn.close()
 
+
+		""" Convert feels to format for pi """
+		pi_jsonf = feelings_to_json(all_the_feels)
+		print(pi_jsonf)
+
+
 		""" Update lights in DB """
-		light_parameters = json_to_light_parameters(jsonf)
-		dbconn = sqlite3.connect(QUERY_DB_PATH)
-		db = dbconn.cursor()
-		db.execute("INSERT INTO LIGHT_QUERIES VALUES(?, ?, ?)", (None, light_parameters, seq_num))
-		dbconn.commit()
-		dbconn.close()
+		#light_parameters = json_to_light_parameters(pi_jsonf)
+		#dbconn = sqlite3.connect(QUERY_DB_PATH)
+		#db = dbconn.cursor()
+		#db.execute("INSERT INTO LIGHT_QUERIES VALUES(?, ?, ?)", (None, light_parameters, seq_num))
+		#dbconn.commit()
+		#dbconn.close()
 
 		""" run python code comment out when testing"""
 		#result = subprocess.run("./LEDcontrol_main.py", stdout=subprocess.PIPE)

@@ -58,8 +58,23 @@ def make_dbs():
 	conn = sqlite3.connect(QUERY_DB_PATH)
 	c = conn.cursor()
 	for arm in range(1, 7):
-		c.execute("CREATE TABLE IF NOT EXISTS MOV_QUERIES_ARM{}(ID integer PRIMARY KEY AUTOINCREMENT, traveldistance integer NOT NULL,radius integer NOT NULL, weight_1 integer NOT NULL ,weight_2 integer NOT NULL ,weight_3 integer NOT NULL ,weight_4 integer NOT NULL ,weight_5 integer NOT NULL ,weight_6 integer NOT NULL ,seq_num integer NOT NULL);".format(arm))
+		c.execute("CREATE TABLE IF NOT EXISTS MOV_QUERIES(ID integer PRIMARY KEY AUTOINCREMENT, ANGER integer NOT NULL,SADNESS integer NOT NULL, CONFIDENT integer NOT NULL ,FEAR integer NOT NULL ,JOY integer NOT NULL ,TENTATIVE integer NOT NULL ,ANALYTICAL integer NOT NULL)")
 		c.execute("CREATE TABLE IF NOT EXISTS LIGHT_QUERIES(ID integer PRIMARY KEY AUTOINCREMENT, light_parameters text NOT NULL, seq_num integer NOT NULL);")
 	conn.commit()
 	conn.close()
+
+
+
+
+def feelings_to_json(all_the_feels):
+	data = {}
+	list_index = 0
+	for arm in range(1,7):
+		data["arm{}".format(arm)] = {}
+		for link in range(1,4):
+			data["arm{}".format(arm)]["link{}".format(link)] = {"pattern": all_the_feels[list_index].pattern, "color": all_the_feels[list_index].color, "bg": all_the_feels[list_index].background, "dir": all_the_feels[list_index].direction, "size": all_the_feels[list_index].size}
+			list_index += 1
+
+	return json.dumps(data)
+
 

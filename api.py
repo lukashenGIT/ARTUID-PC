@@ -12,7 +12,7 @@ import json
 import logging
 import sqlite3
 import subprocess
-from helpers import json_to_light_parameters, update_move_db, make_dbs, feelings_to_json
+from helpers import json_to_light_parameters, make_dbs, feelings_to_json
 from feelings import *
 
 
